@@ -1,0 +1,116 @@
+<%- include('layout', { title: '訂位 - 餐廳訂位系統', body: `
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">
+                        <i class="fas fa-calendar-alt me-2"></i>餐廳訂位
+                    </h3>
+                </div>
+                <div class="card-body">
+                    ${message ? `
+                        <div class="alert alert-warning" role="alert">
+                            ${message}
+                        </div>
+                    ` : ''}
+                    
+                    <form method="POST" action="/booking">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="restaurant_id" class="form-label">選擇餐廳</label>
+                                <select class="form-select" id="restaurant_id" name="restaurant_id" required>
+                                    <option value="">請選擇餐廳</option>
+                                    ${restaurants.map(restaurant => `
+                                        <option value="${restaurant.id}">${restaurant.name}</option>
+                                    `).join('')}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="party_size" class="form-label">用餐人數</label>
+                                <select class="form-select" id="party_size" name="party_size" required>
+                                    <option value="">請選擇人數</option>
+                                    <option value="1">1人</option>
+                                    <option value="2">2人</option>
+                                    <option value="3">3人</option>
+                                    <option value="4">4人</option>
+                                    <option value="5">5人</option>
+                                    <option value="6">6人</option>
+                                    <option value="7">7人</option>
+                                    <option value="8">8人</option>
+                                    <option value="9">9人</option>
+                                    <option value="10">10人</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="booking_date" class="form-label">訂位日期</label>
+                                <input type="date" class="form-control" id="booking_date" name="booking_date" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="booking_time" class="form-label">訂位時間</label>
+                                <select class="form-select" id="booking_time" name="booking_time" required>
+                                    <option value="">請選擇時間</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="customer_name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="customer_phone" class="form-label">聯絡電話</label>
+                                <input type="tel" class="form-control" id="customer_phone" name="customer_phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="customer_email" class="form-label">電子郵件</label>
+                            <input type="email" class="form-control" id="customer_email" name="customer_email">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="special_requests" class="form-label">特殊需求</label>
+                            <textarea class="form-control" id="special_requests" name="special_requests" rows="3" placeholder="如有特殊需求，請在此說明..."></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check me-2"></i>確認訂位
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 設定最小日期為今天
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('booking_date').min = today;
+    });
+</script>
+` }) %>
