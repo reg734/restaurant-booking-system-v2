@@ -64,7 +64,7 @@ const createTables = async () => {
 
     await pool.query(`
       INSERT INTO users (username, password, role) 
-      VALUES ('admin', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin')
+      VALUES ('admin', '$2a$10$6bwa5pSke0b7Zfgd8Z860eHSxOg.bzYMP8b043XUVrW0mvSWkjJge', 'admin')
       ON CONFLICT (username) DO NOTHING;
     `);
 
